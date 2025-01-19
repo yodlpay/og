@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Opengraph renderer for Yodl Payments
 
-## Getting Started
+This is used to display preview cards in twitter, telegram, etc. It currently powers https://og.yodl.me.
 
-First, run the development server:
+It takes a txId, fetches indexed payment from yodl indexing/scan API and renders an image.
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn install
+yarn run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+touch .env
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Add INDEXER_API_URL to fetch indexed transactions. Ask @yodlpay team for it.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# .env
+INDEXER_API_URL="" 
+```
 
-## Learn More
+## Endpoint
 
-To learn more about Next.js, take a look at the following resources:
+https://og.yodl.me/tx/10:0xda302360e583f04cc64081da15d7e7bae4c9714325a08cfd71771fa42d28ff38
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## txId format
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+txId consists of `{chainId}:{txHash}`
 
-## Deploy on Vercel
+- `chainId` is the numeric chainId or the shortName (e.g. `eth`, `gno`, `oeth`, `arb1`)
+- `txHash` is the transaction hash (of the source transaction)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Notes: chainId is optional and not required currently. It will be useful if you wish to adapt this renderer to fetch data directly on-chain.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
