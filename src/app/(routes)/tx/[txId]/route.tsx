@@ -25,12 +25,14 @@ export async function GET(
   // Font
   const SFProDisplayBold = fetch(
     new URL("https://cdn.jsdelivr.net/npm/sf-font@1.0.0/SFProDisplay-Bold.ttf"),
+    { cache: "force-cache" },
   ).then((res) => res.arrayBuffer());
 
   const SFProDisplayMedium = fetch(
     new URL(
       "https://cdn.jsdelivr.net/npm/sf-font@1.0.0/SFProDisplay-Medium.ttf",
     ),
+    { cache: "force-cache" },
   ).then((res) => res.arrayBuffer());
 
   const { payment } = await fetchPaymentByTxHash(txHash);
