@@ -36,7 +36,7 @@ export type PaymentSimple = {
   senderEnsPrimaryName: string;
 };
 
-export class PaymentNotFoundError extends Error { }
+export class PaymentNotFoundError extends Error {}
 
 export async function fetchPaymentByTxHash(
   txHash: string,
