@@ -1,11 +1,10 @@
+"use server";
+
 import { type NextRequest } from "next/server";
 import { ImageResponse } from "next/og";
 import truncateEthAddress from "truncate-eth-address";
 import { format } from "date-fns";
 import { fetchPaymentByTxHash } from "@/lib/indexerClient";
-import Image from "next/image";
-
-export const runtime = "edge";
 
 export async function GET(
   request: NextRequest,
@@ -117,7 +116,7 @@ export async function GET(
                 </span>
               </div>
 
-              <Image
+              <img
                 src={`${cdnBase}/logos/yodl/logo-white-on-transparent.svg`}
                 style={{ width: 100 }}
                 alt={""}
@@ -166,7 +165,7 @@ export async function GET(
                     color: "#fff",
                   }}
                 >
-                  <Image
+                  <img
                     src={`${cdnBase}/logos/tokens/png/${payment.tokenOutSymbol}.png`}
                     width="40"
                     height="40"
