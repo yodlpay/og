@@ -88,6 +88,7 @@ export async function GET(
 
     const ogConfig = receiverYodlConfig?.og;
     if (ogConfig) {
+      // vercel next/og fails when trying to load an image that does not exist.
       outerBgUrl = (await urlExist(ogConfig.outerBg)) ? ogConfig.outerBg : null;
       innerBgUrl = (await urlExist(ogConfig.innerBg)) ? ogConfig.innerBg : null;
       overlayUrl = (await urlExist(ogConfig.overlay)) ? ogConfig.overlay : null;
@@ -185,7 +186,6 @@ export async function GET(
                   <img
                     src={innerBgUrl}
                     style={{
-                      border: "1px solid red",
                       width: "880",
                       height: "480",
                     }}
@@ -278,7 +278,6 @@ export async function GET(
                 src={overlayUrl}
                 width="600"
                 height="800"
-                style={{ border: "1px solid red", width: 600, height: 800 }}
                 alt={""}
               />
             )}
