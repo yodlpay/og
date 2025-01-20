@@ -5,6 +5,7 @@ import { ImageResponse } from "next/og";
 import truncateEthAddress from "truncate-eth-address";
 import { format } from "date-fns";
 import { fetchPaymentByTxHash } from "@/lib/indexerClient";
+import urlExist from "url-exist";
 
 export async function GET(
   request: NextRequest,
@@ -87,10 +88,12 @@ export async function GET(
 
     const ogConfig = receiverYodlConfig?.og;
     if (ogConfig) {
-      outerBgUrl = ogConfig.outerBgUrl;
-      innerBgUrl = ogConfig.innerBgUrl;
-      overlayUrl = ogConfig.overlayUrl;
+      outerBgUrl = (await urlExist(ogConfig.outerBg)) ? ogConfig.outerBg : null;
+      innerBgUrl = (await urlExist(ogConfig.innerBg)) ? ogConfig.innerBg : null;
+      overlayUrl = (await urlExist(ogConfig.overlay)) ? ogConfig.overlay : null;
     }
+
+    console.log({ ogConfig });
 
     return new ImageResponse(
       (
@@ -120,24 +123,6 @@ export async function GET(
               <img
                 src={outerBgUrl}
                 style={{ width: 1200, height: 800 }}
-                alt={""}
-              />
-            )}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              position: "absolute",
-              top: 0,
-              left: 600,
-              right: 0,
-              bottom: 0,
-            }}
-          >
-            {overlayUrl && (
-              <img
-                src={overlayUrl}
-                style={{ width: 600, height: 400 }}
                 alt={""}
               />
             )}
@@ -199,7 +184,11 @@ export async function GET(
                 {innerBgUrl && (
                   <img
                     src={innerBgUrl}
-                    style={{ width: "880", height: "480" }}
+                    style={{
+                      border: "1px solid red",
+                      width: "880",
+                      height: "480",
+                    }}
                     alt={""}
                   />
                 )}
@@ -273,6 +262,26 @@ export async function GET(
                 {/* <div style={{ display: 'flex', fontSize: 32, fontWeight: "400", color: "#fff" }}>${simple.tokenOutAmountGross}</div> */}
               </div>
             </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              position: "absolute",
+              top: 0,
+              left: 600,
+              right: 0,
+              bottom: 0,
+            }}
+          >
+            {overlayUrl && (
+              <img
+                src={overlayUrl}
+                width="600"
+                height="800"
+                style={{ border: "1px solid red", width: 600, height: 800 }}
+                alt={""}
+              />
+            )}
           </div>
         </div>
       ),
