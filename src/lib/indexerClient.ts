@@ -34,6 +34,7 @@ export type PaymentSimple = {
   receiverEnsPrimaryName: string;
   senderAddress: string;
   senderEnsPrimaryName: string;
+  receiverYodlConfig: any;
 };
 
 export class PaymentNotFoundError extends Error {}
