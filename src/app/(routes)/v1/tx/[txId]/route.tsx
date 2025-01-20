@@ -45,8 +45,6 @@ export async function GET(
     senderEnsPrimaryName,
   } = payment;
 
-  console.log(payment);
-
   const to = receiverEnsPrimaryName || truncateEthAddress(receiverAddress);
   const from = senderEnsPrimaryName || truncateEthAddress(senderAddress);
 
@@ -93,8 +91,6 @@ export async function GET(
       innerBgUrl = (await urlExist(ogConfig.innerBg)) ? ogConfig.innerBg : null;
       overlayUrl = (await urlExist(ogConfig.overlay)) ? ogConfig.overlay : null;
     }
-
-    console.log({ ogConfig });
 
     return new ImageResponse(
       (
@@ -274,12 +270,7 @@ export async function GET(
             }}
           >
             {overlayUrl && (
-              <img
-                src={overlayUrl}
-                width="600"
-                height="800"
-                alt={""}
-              />
+              <img src={overlayUrl} width="600" height="800" alt={""} />
             )}
           </div>
         </div>

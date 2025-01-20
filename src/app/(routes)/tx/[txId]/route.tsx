@@ -44,8 +44,6 @@ export async function GET(
     senderEnsPrimaryName,
   } = payment;
 
-  console.log(payment);
-
   const to = receiverEnsPrimaryName || truncateEthAddress(receiverAddress);
   const from = senderEnsPrimaryName || truncateEthAddress(senderAddress);
 
