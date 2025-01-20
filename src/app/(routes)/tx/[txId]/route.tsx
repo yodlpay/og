@@ -76,8 +76,8 @@ export async function GET(
       ],
     };
 
-    let outerBg = `linear-gradient(to right, #505050, #222325)`;
-    let innerBg = "linear-gradient(to right, #505050, #222325, #313131)";
+    const outerBg = `linear-gradient(to right, #505050, #222325)`;
+    const innerBg = "linear-gradient(to right, #505050, #222325, #313131)";
 
     let outerBgUrl, innerBgUrl, overlayUrl;
 
