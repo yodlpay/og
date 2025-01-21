@@ -1,95 +1,71 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const [baseUrl, setBaseUrl] = useState(
+    "https://cdn.jsdelivr.net/gh/yodlpay/assets/og/default",
+  );
+
+  const previewUrl = `/v1/preview/0x3ee275ae7504f206273f1a0f2d6bfbffda962c028542a8425ef9ca602d85a364?baseUrl=${encodeURIComponent(baseUrl)}`;
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+        <h1>yodl opengraph</h1>
+        <p>API server to generate opengraph images for yodl payments.</p>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+        <h2>Live Preview</h2>
+
+        <div className="flex flex-col gap-4">
+          <div>
+            <label htmlFor="baseUrl" style={{ marginBottom: 5 }}>
+              <pre>baseURL</pre>
+            </label>
+            <input
+              type="text"
+              id="baseUrl"
+              style={{
+                width: "100%",
+                padding: 10,
+                borderRadius: 5,
+                border: "1px solid #ccc",
+                marginBottom: 10,
+              }}
+              value={baseUrl}
+              onChange={(e) => setBaseUrl(e.target.value)}
+              placeholder="Enter inner background URL"
             />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+            <p style={{ marginBottom: 5 }}>
+              Preview card will use the following assets:
+            </p>
+            <ul>
+              <li>
+                <pre>{`${baseUrl}/outer.png`}</pre>
+              </li>
+              <li>
+                <pre>{`${baseUrl}/inner.png`}</pre>
+              </li>
+              <li>
+                <pre>{`${baseUrl}/overlay.png`}</pre>
+              </li>
+            </ul>
+          </div>
+
+          <div style={{ marginTop: 20 }}>
+            <h3 className="text-lg font-medium mb-2">Preview</h3>
+            <img
+              src={previewUrl}
+              width="600"
+              height="315"
+              alt="Preview"
+              className="rounded shadow-lg"
+            />
+          </div>
         </div>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <footer className={styles.footer}></footer>
     </div>
   );
 }
