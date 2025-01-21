@@ -35,9 +35,7 @@ export async function GET(
       innerBgUrl = await urlIfExists(
         `${CDN_BASE}/og/100usdglo.yodl.eth/outer.png`,
       );
-    }
-
-    if (ogConfig && ogConfig.baseUrl) {
+    } else if (ogConfig && ogConfig.baseUrl) {
       const baseUrl = ogConfig.baseUrl;
       // vercel next/og fails when trying to load an image that does not exist.
       outerBgUrl = await urlIfExists(`${baseUrl}/inner.png`);
