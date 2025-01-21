@@ -44,9 +44,6 @@ async function PreviewCard(props: PreviewCardProps) {
     ],
   };
 
-  const outerBg = `linear-gradient(to right, #505050, #222325)`;
-  const innerBg = "linear-gradient(to right, #505050, #222325, #313131)";
-
   const { outerBgUrl, innerBgUrl, payment, overlayUrl } = props;
 
   const {
@@ -80,7 +77,6 @@ async function PreviewCard(props: PreviewCardProps) {
       >
         <div
           style={{
-            background: outerBg,
             display: "flex",
             position: "absolute",
             top: 0,
@@ -146,7 +142,6 @@ async function PreviewCard(props: PreviewCardProps) {
           >
             <div
               style={{
-                background: innerBg,
                 display: "flex",
                 position: "absolute",
                 top: 0,
@@ -157,6 +152,8 @@ async function PreviewCard(props: PreviewCardProps) {
             >
               <img
                 src={innerUrlOrDefault}
+                width="718"
+                height="392"
                 style={{
                   width: "718",
                   height: "392",

@@ -49,8 +49,10 @@ export async function GET(
       innerBgUrl = await urlIfExists(ogConfig.inner);
       overlayUrl = await urlIfExists(ogConfig.overlay);
     } else {
-      outerBgUrl = await urlIfExists(`${CDN_BASE}/og/default/inner.png`);
-      innerBgUrl = await urlIfExists(`${CDN_BASE}/og/default/outer.png`);
+      outerBgUrl = await urlIfExists(`${CDN_BASE}/og/default/outer.png`);
+      innerBgUrl = await urlIfExists(`${CDN_BASE}/og/default/inner.png`);
+      console.log("outerBgUrl", outerBgUrl);
+      console.log("innerBgUrl", innerBgUrl);
       overlayUrl = await urlIfExists(`${CDN_BASE}/og/default/overlay.png`);
     }
 
