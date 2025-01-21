@@ -40,14 +40,18 @@ export async function GET(
     if (ogConfig && ogConfig.baseUrl) {
       const baseUrl = ogConfig.baseUrl;
       // vercel next/og fails when trying to load an image that does not exist.
-      outerBgUrl = await urlIfExists(`${baseUrl}/og/default/inner.png`);
-      innerBgUrl = await urlIfExists(`${baseUrl}/og/default/outer.png`);
-      overlayUrl = await urlIfExists(`${baseUrl}/og/default/overlay.png`);
+      outerBgUrl = await urlIfExists(`${baseUrl}/inner.png`);
+      innerBgUrl = await urlIfExists(`${baseUrl}/outer.png`);
+      overlayUrl = await urlIfExists(`${baseUrl}/overlay.png`);
     } else if (ogConfig) {
       // vercel next/og fails when trying to load an image that does not exist.
       outerBgUrl = await urlIfExists(ogConfig.outer);
       innerBgUrl = await urlIfExists(ogConfig.inner);
       overlayUrl = await urlIfExists(ogConfig.overlay);
+    } else {
+      outerBgUrl = await urlIfExists(`${CDN_BASE}/og/default/inner.png`);
+      innerBgUrl = await urlIfExists(`${CDN_BASE}/og/default/outer.png`);
+      overlayUrl = await urlIfExists(`${CDN_BASE}/og/default/overlay.png`);
     }
 
     return PreviewCard({ payment, outerBgUrl, innerBgUrl, overlayUrl });
