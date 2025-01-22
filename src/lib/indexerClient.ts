@@ -29,6 +29,8 @@ export type PaymentSimple = {
   tokenOutAddress: string;
   tokenOutAmountGross: string;
   tokenOutAmountGrossNumber: number;
+  invoiceAmount: string;
+  invoiceCurrency: string;
   tokenOutAmountGrossDn: string;
   receiverAddress: string;
   receiverEnsPrimaryName: string;

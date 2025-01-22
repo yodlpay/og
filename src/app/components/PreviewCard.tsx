@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { ImageResponse } from "next/og";
 import truncateEthAddress from "truncate-eth-address";
 import { CDN_BASE } from "../constants";
+import { currencyToSymbol } from "@/lib/util";
 
 type PreviewCardProps = {
   payment: PaymentSimple;
@@ -62,6 +63,10 @@ async function PreviewCard(props: PreviewCardProps) {
   const innerUrlOrDefault = innerBgUrl || `${CDN_BASE}/og/default/inner.png`;
   const overlayUrlOrDefault =
     overlayUrl || `${CDN_BASE}/og/default/overlay.png`;
+
+  // add padding to THB/CHF etc
+  const currencySymbol =
+    currencyToSymbol(payment.invoiceCurrency) || `${payment.invoiceCurrency} `;
 
   return new ImageResponse(
     (
@@ -181,7 +186,8 @@ async function PreviewCard(props: PreviewCardProps) {
                   color: "#fff",
                 }}
               >
-                ${payment.tokenOutAmountGross}
+                {currencySymbol}
+                {payment.invoiceAmount}
               </div>
               <div
                 style={{
