@@ -3,6 +3,9 @@ import { format } from "date-fns";
 import { ImageResponse } from "next/og";
 import truncateEthAddress from "truncate-eth-address";
 import { CDN_BASE } from "../constants";
+import { currencyToSymbol } from "@/lib/util";
+
+import * as dnum from "dnum";
 
 type PreviewCardProps = {
   payment: PaymentSimple;
@@ -62,6 +65,10 @@ async function PreviewCard(props: PreviewCardProps) {
   const innerUrlOrDefault = innerBgUrl || `${CDN_BASE}/og/default/inner.png`;
   const overlayUrlOrDefault =
     overlayUrl || `${CDN_BASE}/og/default/overlay.png`;
+
+  // add padding to THB/CHF etc
+  const currencySymbol =
+    currencyToSymbol(payment.invoiceCurrency) || `${payment.invoiceCurrency} `;
 
   return new ImageResponse(
     (
@@ -181,7 +188,8 @@ async function PreviewCard(props: PreviewCardProps) {
                   color: "#fff",
                 }}
               >
-                ${payment.tokenOutAmountGross}
+                {currencySymbol}
+                {dnum.format(dnum.from(payment.invoiceAmount))}
               </div>
               <div
                 style={{
@@ -198,7 +206,7 @@ async function PreviewCard(props: PreviewCardProps) {
                   style={{ marginRight: 15, height: 40, width: 40 }}
                   alt={""}
                 />
-                ${payment.tokenOutAmountGross} {payment.tokenOutSymbol}
+                {dnum.format(dnum.from(payment.tokenOutAmountGross), { digits: 1 })} {payment.tokenOutSymbol}
               </div>
               <div
                 style={{

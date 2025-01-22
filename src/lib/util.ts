@@ -19,3 +19,24 @@ export function splitTxId(txId: string) {
 
   return { chainId, txHash };
 }
+
+const currencyToSymbolMap = {
+  USD: "$",
+  EUR: "€",
+  GBP: "£",
+  JPY: "¥",
+  KRW: "₩",
+  THB: "฿",
+  VND: "₫",
+  IDR: "Rp",
+  MYR: "RM",
+  PHP: "₱",
+  SGD: "S$",
+  HKD: "HK$",
+  NZD: "NZ$",
+};
+
+export function currencyToSymbol(currency: string) {
+  // @ts-ignore
+  return currencyToSymbolMap[currency];
+}
