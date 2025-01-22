@@ -5,6 +5,8 @@ import truncateEthAddress from "truncate-eth-address";
 import { CDN_BASE } from "../constants";
 import { currencyToSymbol } from "@/lib/util";
 
+import * as dnum from "dnum";
+
 type PreviewCardProps = {
   payment: PaymentSimple;
   outerBgUrl: string | undefined;
@@ -187,7 +189,7 @@ async function PreviewCard(props: PreviewCardProps) {
                 }}
               >
                 {currencySymbol}
-                {payment.invoiceAmount}
+                {dnum.format(dnum.from(payment.invoiceAmount))}
               </div>
               <div
                 style={{
@@ -204,7 +206,7 @@ async function PreviewCard(props: PreviewCardProps) {
                   style={{ marginRight: 15, height: 40, width: 40 }}
                   alt={""}
                 />
-                ${payment.tokenOutAmountGross} {payment.tokenOutSymbol}
+                {dnum.format(dnum.from(payment.tokenOutAmountGross), { digits: 1 })} {payment.tokenOutSymbol}
               </div>
               <div
                 style={{
