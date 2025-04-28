@@ -34,6 +34,7 @@ const currencyToSymbolMap = {
   SGD: "S$",
   HKD: "HK$",
   NZD: "NZ$",
+  BRL: "R$",
 };
 
 export function currencyToSymbol(currency: string) {
