@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { ImageResponse } from "next/og";
 import truncateEthAddress from "truncate-eth-address";
 import { CDN_BASE } from "../constants";
-import { currencyToSymbol } from "@/lib/util";
+import { currencyToSymbol, formatNumberWithSuffix } from "@/lib/util";
 
 import * as dnum from "dnum";
 
@@ -183,13 +183,13 @@ async function PreviewCard(props: PreviewCardProps) {
               <div
                 style={{
                   display: "flex",
-                  fontSize: 90,
-                  fontWeight: "700",
+                  fontSize: 82,
+                  fontWeight: "600",
                   color: "#fff",
                 }}
               >
                 {currencySymbol}
-                {dnum.format(dnum.from(payment.invoiceAmount))}
+                {formatNumberWithSuffix(payment.invoiceAmount)}
               </div>
               <div
                 style={{
