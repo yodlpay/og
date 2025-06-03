@@ -56,7 +56,7 @@ export function formatNumberWithSuffix(num: string | number): string {
     );
   }
 
-  if (absValue >= 1_000) {
+  if (absValue >= 10_000) {
     const thousands = value / 1_000;
     return (
       new Intl.NumberFormat("en-US", {
